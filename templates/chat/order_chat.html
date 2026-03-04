@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Chat pedido #{{thread.order_id}}</h2>
+<div id="messages">
+  {% for m in messages %}
+    <p><b>{{m.sender.username}}</b>: {{m.text}}</p>
+  {% endfor %}
+</div>
+<input id="msg" placeholder="Mensaje">
+<button onclick="sendMsg()">Enviar</button>
+<script>
+const ws = new WebSocket(`ws://${window.location.host}/ws/chat/{{thread.order_id}}/`)
+ws.onmessage = (e) => {
+  const data = JSON.parse(e.data)
+  document.getElementById('messages').innerHTML += `<p><b>${data.sender_id}</b>: ${data.text}</p>`
+}
+function sendMsg(){
+  ws.send(JSON.stringify({text: document.getElementById('msg').value}))
+  document.getElementById('msg').value=''
+}
+</script>
+{% endblock %}
