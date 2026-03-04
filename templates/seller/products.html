@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Mis productos</h2>
+<ul>{% for p in products %}<li>{{p.name}} - {{p.stock}} - publicado: {{p.published}}</li>{% endfor %}</ul>
+{% endblock %}

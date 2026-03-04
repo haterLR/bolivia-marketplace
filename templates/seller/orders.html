@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Pedidos del vendedor</h2>
+<ul>
+{% for o in orders %}
+<li>Pedido {{o.id}} - {{o.status}} - Bs {{o.total_bob}} - <a href="/chat/order/{{o.id}}/">Chat</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

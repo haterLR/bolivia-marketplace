@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Catálogo Bolivia (BOB)</h1>
+<form method="get">
+  <input type="text" name="q" placeholder="Buscar...">
+  <input type="text" name="city" placeholder="Ciudad">
+  <input type="text" name="category" placeholder="Categoría">
+  <button>Filtrar</button>
+</form>
+<ul>
+{% for product in products %}
+  <li>
+    <a href="/products/{{product.id}}/">{{product.name}}</a> - Bs {{product.price_bob}} - {{product.city}}
+  </li>
+{% empty %}<li>Sin productos.</li>{% endfor %}
+</ul>
+{% endblock %}
